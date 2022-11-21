@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/StarR-ight/OSSW_team/issues"
   },
-  "homepage": "https://github.com/StarR-ight/OSSW_team#readme"
+  "homepage": "https://github.com/StarR-ight/OSSW_team#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.5.3"
+  }
 }
