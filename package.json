@@ -1,0 +1,19 @@
+{
+  "name": "chatting",
+  "version": "1.0.0",
+  "description": "chatting program",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StarR-ight/OSSW_team.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/StarR-ight/OSSW_team/issues"
+  },
+  "homepage": "https://github.com/StarR-ight/OSSW_team#readme"
+}
