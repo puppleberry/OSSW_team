@@ -16,7 +16,7 @@ app.use('/css', express.static('./static/css'))
 app.use('/js', express.static('./static/js'))
 
 app.get('/', function(request, response){
-    fs.readFile('./static/js/index.html', function(err, data){
+    fs.readFile('./static/index.html', function(err, data){
         if(err){
             response.send('error occured')
         }else{
@@ -27,17 +27,30 @@ app.get('/', function(request, response){
     })
 })
 
-io.sockets.on('connection', function(socket){
-    console.log('User connected');
+io.sockets.on('connection', function(socket) {
 
-    socket.on('send', function(data){
-        console.log('Message: ', data.msg)
+    socket.on('newUser', function(name) {
+      console.log(name + ' is connected')
+  
+      socket.name = name
+  
+      io.sockets.emit('update', {type: 'connect', name: 'SERVER', message: name + '님이 접속하였습니다.'})
     })
 
-    socket.on('disconnect', function(){
-        console.log('Disconnection')
+    socket.on('message', function(data) {
+      data.name = socket.name
+      
+      console.log(data)
+  
+      socket.broadcast.emit('update', data);
     })
-})
+  
+    socket.on('disconnect', function() {
+      console.log(socket.name + 'has left')
+  
+      socket.broadcast.emit('update', {type: 'disconnect', name: 'SERVER', message: socket.name + '님이 나가셨습니다.'});
+    })
+  })
 
 server.listen(8080, function(){
     console.log('Server is running...')
