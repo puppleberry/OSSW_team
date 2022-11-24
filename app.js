@@ -27,6 +27,18 @@ app.get('/', function(request, response){
     })
 })
 
+io.sockets.on('connection', function(socket){
+    console.log('User connected');
+
+    socket.on('send', function(data){
+        console.log('Message: ', data.msg)
+    })
+
+    socket.on('disconnect', function(){
+        console.log('Disconnection')
+    })
+})
+
 server.listen(8080, function(){
     console.log('Server is running...')
 })
