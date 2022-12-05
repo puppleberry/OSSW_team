@@ -31,10 +31,23 @@ app.get('/', function(request, response){
 
 io.on('connection', function(socket) {
 
-  socket.on('chatting', function(data){
-    console.log(data);
-    io.emit('chatting', data)
-  });
+    socket.on('newUser', function(name){
+        console.log(name + " connect");
+        socket.name = name;
+        io.emit('announce', name + " 가 접속했습니다.");
+    });
+
+    socket.on('chatting', function(data){
+        console.log(data);
+        const {name, msg} = data;
+        socket.name = name;
+        io.emit('chatting', data)
+    });
+
+    socket.on('disconnect', function(){
+        console.log(socket.name + " disconnect");
+        io.emit('announce', socket.name + " 가 퇴장했습니다.");
+    })
 
 });
 

@@ -7,10 +7,25 @@ const chatInput = document.querySelector('.chatting-input');
 const sendButton = document.querySelector('.send-button');
 const displayContainer = document.querySelector('.display-container');
 
+socket.on('connect',function(){
+    var name = prompt('환영합니다! 당신을 뭐라고 소개하나요: ', '');
+    if(!name){
+      name = '익명의 누군가'+ Math.floor(Math.random()*100);
+    }
+    nickname.defaultValue = name;
+    socket.emit('newUser', name);
+});
+
 socket.on('chatting', function(data){
-  const { name, msg, time } = data;
-  const item = new Li(name, msg, time);
+  const { name, msg } = data;
+  const item = new Li(name, msg);
   item.makeLi();
+  displayContainer.scrollTo(0, displayContainer.scrollHeight);
+});
+
+socket.on('announce', function(msg){
+  const item = new announement(msg);
+  item.makeAn();
   displayContainer.scrollTo(0, displayContainer.scrollHeight);
 });
 
@@ -27,6 +42,18 @@ function Li(name, msg) {
     </span>
     <span class="message">${this.msg}</span>`;
   
+    li.innerHTML = dom;
+    chatList.appendChild(li);
+  };
+}
+
+function announement(msg){
+  this.msg = msg;
+
+  this.makeAn = () => {
+    const li = document.createElement('li');
+    li.classList.add('announce');
+    const dom = `<span class="broadcast">${this.msg}</span>`;
     li.innerHTML = dom;
     chatList.appendChild(li);
   };
