@@ -8,14 +8,34 @@
         <script src="/js/index.js"></script>
     </head>
     <body>
-        <div id="main">
-        <div id="chat">
-            <!-- 채팅 메시지 영역 -->
-        </div>
-        <div>
-            <input type="text" id="test" placeholder="메시지를 입력해주세요..">
-            <button onclick="send()">전송</button>
-        </div>
-        </div>
+        <div class="wrapper">
+            <div class="display-container">
+              <ul class="chatting-list">
+                <!-- 채팅하나씩 li로 집어 넣을 것 -->
+                <li class="sent">
+                  <span class="profile">
+                    <span class="user">아이유</span>
+                    <img class="image" src="https://placeimg.com/50/50/any" alt="any" />
+                  </span>
+                  <span class="message">안녕</span>
+                  <span class="time">오후 2:10</span>
+                </li>
+                <li class="received">
+                  <span class="profile">
+                    <span class="user">아이유</span>
+                    <img class="image" src="https://placeimg.com/50/50/any" alt="any" />
+                  </span>
+                  <span class="message">안녕</span>
+                  <span class="time">오후 2:10</span>
+                </li>
+              </ul>
+            </div>
+            <div class="input-container">
+              <span>
+                <input type="text" class="chatting-input" />
+                <button class="send-button">전송</button>
+              </span>
+            </div>
+          </div>
     </body>
 </html>
