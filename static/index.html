@@ -5,29 +5,16 @@
         <title>채팅</title>
         <link rel="stylesheet" href="/css/index.css">
         <script src="/socket.io/socket.io.js"></script>
-        <script src="/js/index.js"></script>
     </head>
     <body>
         <div class="wrapper">
+            <div class="user-container">
+                <label for="nickname">대화명</label>
+                <input type="text" id="nickname" />
+              </div>
             <div class="display-container">
               <ul class="chatting-list">
                 <!-- 채팅하나씩 li로 집어 넣을 것 -->
-                <li class="sent">
-                  <span class="profile">
-                    <span class="user">아이유</span>
-                    <img class="image" src="https://placeimg.com/50/50/any" alt="any" />
-                  </span>
-                  <span class="message">안녕</span>
-                  <span class="time">오후 2:10</span>
-                </li>
-                <li class="received">
-                  <span class="profile">
-                    <span class="user">아이유</span>
-                    <img class="image" src="https://placeimg.com/50/50/any" alt="any" />
-                  </span>
-                  <span class="message">안녕</span>
-                  <span class="time">오후 2:10</span>
-                </li>
               </ul>
             </div>
             <div class="input-container">
@@ -38,4 +25,5 @@
             </div>
           </div>
     </body>
+    <script src="/js/index.js"></script>
 </html>

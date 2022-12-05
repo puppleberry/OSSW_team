@@ -1,51 +1,39 @@
-var socket = io()
+'use strict';
 
-socket.on('connect', function() {
-  var name = prompt('반갑습니다!', '')
-  if(!name) {
-    name = '익명'
-  }
-  socket.emit('newUser', name)
-})
+const socket = io();
+const nickname = document.querySelector('#nickname');
+const chatList = document.querySelector('.chatting-list');
+const chatInput = document.querySelector('.chatting-input');
+const sendButton = document.querySelector('.send-button');
 
-socket.on('update', function(data) {
-  var chat = document.getElementById('chat')
+socket.on('chatting', function(data){
+  const { name, msg, time } = data;
+  const item = new Li(name, msg, time);
+  item.makeLi();
+});
 
-  var message = document.createElement('div')
-  var node = document.createTextNode(`${data.name}: ${data.message}`)
-  var className = ''
-
-  switch(data.type) {
-    case 'message':
-      className = 'other'
-      break
-
-    case 'connect':
-      className = 'connect'
-      break
-
-    case 'disconnect':
-      className = 'disconnect'
-      break
-  }
-
-  message.classList.add(className)
-  message.appendChild(node)
-  chat.appendChild(message)
-})
-
-
-function send() {
-  var message = document.getElementById('test').value
+function Li(name, msg) {
+  this.name = name;
+  this.msg = msg;
+    
+  this.makeLi = () => {
+    const li = document.createElement('li');
+    li.classList.add(nickname.value === this.name ? 'sent' : 'received');
+    const dom = `<span class="profile">
+    <span class="user">${this.name}</span>
+    <img class="image" src="https://placeimg.com/50/50/any" alt="any" />
+    </span>
+    <span class="message">${this.msg}</span>`;
   
-  document.getElementById('test').value = ''
-
-  var chat = document.getElementById('chat')
-  var msg = document.createElement('div')
-  var node = document.createTextNode(message)
-  msg.classList.add('me')
-  msg.appendChild(node)
-  chat.appendChild(msg)
-
-  socket.emit('message', {type: 'message', message: message})
+    li.innerHTML = dom;
+    chatList.appendChild(li);
+  };
 }
+
+sendButton.addEventListener('click', () => {
+  const param = {
+    name: nickname.value,
+    msg: chatInput.value,
+  };
+  socket.emit('chatting', param);
+});
