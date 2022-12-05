@@ -38,7 +38,6 @@ function Li(name, msg) {
     li.classList.add(nickname.value === this.name ? 'sent' : 'received');
     const dom = `<span class="profile">
     <span class="user">${this.name}</span>
-    <img class="image" src="https://placeimg.com/50/50/any" alt="any" />
     </span>
     <span class="message">${this.msg}</span>`;
   
