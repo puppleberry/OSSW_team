@@ -111,6 +111,15 @@ body {
   flex: 7;
 }
 
+.broadcast {
+  border-radius: 5px;
+  padding: 0.2rem;
+  font-size: 12px;
+  margin: 0 5px;
+  flex: 7;
+  text-align: center;
+}
+
 .time {
   font-size: 10px;
   margin: 0 5px;
@@ -127,4 +136,8 @@ body {
 
 .received .message {
   background: #fff;
+}
+
+.announce .broadcast {
+  background: rgba(180, 167, 167, 0.677);
 }
