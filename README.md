@@ -26,3 +26,11 @@
 >> - HTML 템플릿에 필요한 코드를 추가 및 수정
 >> - CSS 일부 수정   
 ### 1.4. 사용한 기술 스택
+> BACK
+> > - node.js
+> > - socket.io - https://github.com/socketio/socket.io (MIT License)
+
+> FRONT
+> > - HTML
+> > - CSS
+> > - javascript
