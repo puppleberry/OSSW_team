@@ -27,10 +27,92 @@
 >> - CSS 일부 수정   
 ### 1.4. 사용한 기술 스택
 > BACK
-> > - node.js
-> > - socket.io - https://github.com/socketio/socket.io (MIT License)
+> > - node.js - [github](https://github.com/nodejs/node/LICENSE) (MIT Lincense)
+> > - socket.io - [github](https://github.com/socketio/socket.io/LICENSE) (MIT License)
 
 > FRONT
 > > - HTML
 > > - CSS
 > > - javascript
+
+### 1.5. 라이선스
+    node.js 와 socket.io의 라이선스와 동일한 MIT License 적용
+
+## 2. 프로젝트 깃허브 사용 용도
+### 2.1. git add / commit / push
+```
+일반적으로 업데이트 한 코드를 깃허브 원격저장소에 업로드 하기위해서 해당 명령어를 사용하여 업로드함.
+```
+### 2.2. fork, branch, PR, merge
+```
+프로젝트에 참가하는 인원 모두 해당 프로젝트를 fork해서 본인 저장소에 둔 후, branch로 자신의 몇번째 패치인지 구분,
+패치 한 이후에 PR을 보내서 merge해주는 식으로 협업을 진행함.
+```
+### 2.3. release
+```
+깃허브의 장점인 버전 관리를 사용자들도 느낄 수 있도록 하기 위해서 큰 기능이 업데이트 될 때 마다 버전을 구분하여 release 시킴
+pre-release, lateset-release 사용은 코드가 단순하여 심각한 오류가 발생할 일이 없고, 사용하는 유저가 한정되어있으니,
+stable version, latese version같은것을 구분할 필요가 없다고 생각했기 때문.
+```
+### 2.4. issue
+```
+코드의 문제를 발견하는데, 팀 프로젝트를 같이 하는 팀원들끼리의 메신저를 사용하여 오류를 찾아내고 수정해도 좋았겠지만,
+깃허브의 issue를 사용하게 되면,
+해당 issue가 발생한다는 사실, 어떻게 혹은 언제 고쳐졌나 하는 사실, 그리고 여러 기능을 첨가하여 한눈에 볼 수 있다는 점
+이런 이유들 때문에 github의 issue 기능을 팀 프로젝트에 사용하게 되었다.
+```
+
+## 3. CODE explain, CODE documentation
+
+### 3.1 app.js
+#### 3.1.1 constant setting part
+```javascript
+// getting express module
+const express = require('express')
+
+// getting socket.io module
+const socket = require('socket.io')
+
+// getting node.js standard module
+const path = require('path')
+const http = require('http')
+
+const fs = require('fs')
+const app = express() // construct express object
+const server = http.createServer(app) // construct http server
+const io = socket(server) // binding the server
+```
+써야 할 모듈을 불러오고, http 서버를 생성하고 서버를 소켓에 바인딩 하는 과정
+
+#### 3.1.2 event listen part
+```
+io.on('connection', function(socket) {
+
+    socket.on('newUser', function(name){
+        console.log(name + " connect");
+        socket.name = name;
+        io.emit('announce', name + " 가 접속했습니다.");
+    });
+
+    socket.on('chatting', function(data){
+        console.log(data);
+        const {name, msg} = data;
+        socket.name = name;
+        io.emit('chatting', data)
+    });
+
+    socket.on('disconnect', function(){
+        console.log(socket.name + " disconnect");
+        io.emit('announce', socket.name + " 가 퇴장했습니다.");
+    })
+
+});
+```
+이벤트를 세가지로 나누어서 구분함
+- 'newUser'
+  - 클라이언트가 접속하였을 때 오는 이벤트
+- 'chatting'
+  - 클라이언트가 채팅할 때 오는 이벤트
+- 'disconnect'
+  - 클라이언트가 접속을 끊었을 때 오는 이벤트
+  
