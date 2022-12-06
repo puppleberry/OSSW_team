@@ -37,7 +37,7 @@
 
 ### 1.5. 라이선스
     node.js 와 socket.io의 라이선스와 동일한 MIT License 적용
-
+* * *
 ## 2. 프로젝트 깃허브 사용 용도
 ### 2.1. git add / commit / push
 ```
@@ -61,7 +61,7 @@ stable version, latese version같은것을 구분할 필요가 없다고 생각�
 해당 issue가 발생한다는 사실, 어떻게 혹은 언제 고쳐졌나 하는 사실, 그리고 여러 기능을 첨가하여 한눈에 볼 수 있다는 점
 이런 이유들 때문에 github의 issue 기능을 팀 프로젝트에 사용하게 되었다.
 ```
-
+* * *
 ## 3. CODE explain, CODE documentation
 
 ### 3.1 app.js
@@ -85,7 +85,7 @@ const io = socket(server) // binding the server
 써야 할 모듈을 불러오고, http 서버를 생성하고 서버를 소켓에 바인딩 하는 과정
 
 #### 3.1.2 event listen part
-```
+```javascript
 io.on('connection', function(socket) {
 
     socket.on('newUser', function(name){
@@ -116,3 +116,66 @@ io.on('connection', function(socket) {
 - 'disconnect'
   - 클라이언트가 접속을 끊었을 때 오는 이벤트
   
+### 3.2. index.js
+#### 3.2.1 constant setting
+```javascript
+const socket = io();
+const nickname = document.querySelector('#nickname');
+const chatList = document.querySelector('.chatting-list');
+const chatInput = document.querySelector('.chatting-input');
+const sendButton = document.querySelector('.send-button');
+const displayContainer = document.querySelector('.display-container');
+```
+html의 쿼리를 담아서, 해당 쿼리를 사용할 수 있도록 상수로 선언해주는 과정
+#### 3.2.2 event listening
+```javascript
+socket.on('connect',function(){
+    var name = prompt('환영합니다! 당신을 뭐라고 소개하나요: ', '');
+    if(!name){
+      name = '익명의 누군가'+ Math.floor(Math.random()*100);
+    }
+    nickname.defaultValue = name;
+    socket.emit('newUser', name);
+});
+
+socket.on('chatting', function(data){
+  const { name, msg } = data;
+  const item = new Li(name, msg);
+  item.makeLi();
+  displayContainer.scrollTo(0, displayContainer.scrollHeight);
+});
+
+socket.on('announce', function(msg){
+  const item = new announement(msg);
+  item.makeAn();
+  displayContainer.scrollTo(0, displayContainer.scrollHeight);
+});
+```
+- 'connect'
+    - 기본으로 설정되어있는 이벤트, 클라이언트가 접속하면 자동 실행 됨, 이름을 설정해주고 그 뒤에 서버로 넘겨서 newUser 이벤트 실행시킴.
+- 'chatting'
+    - 채팅 이벤트, HTML 코드의 채팅부분 `<li>` 쿼리에 일부 코드를 삽입하여서(채팅) 점점 채팅을 만들어 내주는 이벤트.
+- 'announce'
+    - 공지 이벤트, HTML 코드의 채팅부분 `<li>` 쿼리에 일부 코드를 삽입하여서(공지) 공지를 만들어 내는 이벤트.
+
+#### 3.2.3 sending
+```javascript
+chatInput.addEventListener('keypress', function(e){
+  if (e.keyCode === 13) {
+    send();
+  }
+});
+
+function send() {
+  const param = {
+    name: nickname.value,
+    msg: chatInput.value,
+  };
+  socket.emit('chatting', param);
+}
+
+sendButton.addEventListener('click', send);
+```
+실행될 때 서버로 chatting 이벤트를 보내는 send 함수를 제작하여 
+sendButton에 눌렸을 때 send 함수를 실행시키도록 하고
+keypress, 13번, 엔터를 눌렀을 때 send 함수를 실행시키도록 함.
