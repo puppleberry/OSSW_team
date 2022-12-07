@@ -31,7 +31,7 @@
 
 ### 1.4. 사용한 기술 스택
 > BACK
-> > - node.js - [github](https://github.com/nodejs/node/LICENSE) (MIT Lincense)
+> > - node.js - [github](https://github.com/nodejs/node/blob/main/LICENSE) (MIT Lincense)
 > > - socket.io - [github](https://github.com/nodejs/node/blob/main/LICENSE) (MIT License)
 > > - express.js - [github](https://github.com/expressjs/express/blob/master/LICENSE) (MIT License)
 
