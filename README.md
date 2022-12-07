@@ -32,7 +32,7 @@
 ### 1.4. 사용한 기술 스택
 > BACK
 > > - node.js - [github](https://github.com/nodejs/node/LICENSE) (MIT Lincense)
-> > - socket.io - [github](https://github.com/socketio/socket.io/blob/main/LICENSE) (MIT License)
+> > - socket.io - [github](https://github.com/nodejs/node/blob/main/LICENSE) (MIT License)
 
 > FRONT
 > > - HTML
