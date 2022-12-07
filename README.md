@@ -44,7 +44,6 @@
 
 > Backend
 > > - [server Part](https://github.com/leegeunhyeok/node-chat)
-> > - [front Part](https://velog.io/@reasonz/2022.05.22-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%B1%84%ED%8C%85-%EC%95%B1-%EB%A7%8C%EB%93%A4%EA%B8%B0-2-%EB%82%98%EB%A8%B8%EC%A7%80-%EC%99%84%EC%84%B1%ED%95%98%EA%B8%B0)
 > > - [node js api](https://nodejs.org/dist/latest-v18.x/docs/api/)
 > > - [socket.io api](https://socket.io/docs/v3/)
 > > - [express.js api](https://expressjs.com/en/5x/api.html)
