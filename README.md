@@ -55,7 +55,11 @@
 > > - [Final html/css 2](https://www.youtube.com/watch?v=UoKoPP91Qx0&list=PLpJDjPqxGWGrSGPUBqWlsJlcLF_grNClK&index=5&t=1904s)
 
 ### 1.6. 라이선스
-    node.js 와 socket.io의 라이선스와 동일한 MIT License 적용
+```
+node.js 와 socket.io의 라이선스와 동일한 MIT License 적용.
+html/css 부분이 K사의 SNS 앱의 색감과 비슷하지만 '색감'에 대한 저작권은 따로 존재하지 않음.
+```
+참고자료: [색감](https://post.naver.com/viewer/postView.nhn?volumeNo=30103882&memberNo=36301288&searchKeyword=%EC%A0%80%EC%9E%91%EA%B6%88&searchRank=2)
 * * *
 ## 2. 프로젝트 깃허브 사용 용도
 ### 2.1. git add / commit / push
